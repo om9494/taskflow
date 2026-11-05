@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         PROJECT_NAME = 'TaskFlow'
-        NODE_ENV     = 'production'
     }
 
     options {
@@ -53,22 +52,22 @@ pipeline {
                             echo "--- Installing Frontend Dependencies ---"
                             cd frontend
                             if [ -f package-lock.json ]; then
-                                echo "Found package-lock.json. Running npm ci..."
-                                npm ci || npm install
+                                echo "Found package-lock.json. Running npm ci --include=dev..."
+                                npm ci --include=dev || npm install --include=dev
                             else
-                                echo "package-lock.json not found. Running npm install..."
-                                npm install
+                                echo "package-lock.json not found. Running npm install --include=dev..."
+                                npm install --include=dev
                             fi
                             cd ..
 
                             echo "--- Installing Backend Dependencies ---"
                             cd backend
                             if [ -f package-lock.json ]; then
-                                echo "Found package-lock.json. Running npm ci..."
-                                npm ci || npm install
+                                echo "Found package-lock.json. Running npm ci --include=dev..."
+                                npm ci --include=dev || npm install --include=dev
                             else
-                                echo "package-lock.json not found. Running npm install..."
-                                npm install
+                                echo "package-lock.json not found. Running npm install --include=dev..."
+                                npm install --include=dev
                             fi
                             cd ..
                             echo "[SUCCESS] Dependencies installed successfully."
@@ -79,11 +78,11 @@ pipeline {
                             echo --- Installing Frontend Dependencies ---
                             cd frontend
                             if exist package-lock.json (
-                                echo Found package-lock.json. Running npm ci...
-                                call npm ci
+                                echo Found package-lock.json. Running npm ci --include=dev...
+                                call npm ci --include=dev || call npm install --include=dev
                             ) else (
-                                echo package-lock.json not found. Running npm install...
-                                call npm install
+                                echo package-lock.json not found. Running npm install --include=dev...
+                                call npm install --include=dev
                             )
                             if %ERRORLEVEL% NEQ 0 (
                                 echo [ERROR] Frontend dependency installation failed!
@@ -95,11 +94,11 @@ pipeline {
                             echo --- Installing Backend Dependencies ---
                             cd backend
                             if exist package-lock.json (
-                                echo Found package-lock.json. Running npm ci...
-                                call npm ci
+                                echo Found package-lock.json. Running npm ci --include=dev...
+                                call npm ci --include=dev || call npm install --include=dev
                             ) else (
-                                echo package-lock.json not found. Running npm install...
-                                call npm install
+                                echo package-lock.json not found. Running npm install --include=dev...
+                                call npm install --include=dev
                             )
                             if %ERRORLEVEL% NEQ 0 (
                                 echo [ERROR] Backend dependency installation failed!
