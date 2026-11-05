@@ -27,8 +27,9 @@ resource "docker_network" "taskflow_iac_network" {
 
 # 3. Demonstration container mapped to configurable host port (default: 8088)
 resource "docker_container" "taskflow_iac_container" {
-  name  = var.container_name
-  image = docker_image.nginx.image_id
+  name         = var.container_name
+  image        = docker_image.nginx.image_id
+  network_mode = "bridge"
 
   networks_advanced {
     name = docker_network.taskflow_iac_network.name
