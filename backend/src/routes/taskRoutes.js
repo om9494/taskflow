@@ -11,7 +11,7 @@ const {
 const { validateObjectId, validateTaskInput } = require('../middleware/validate');
 
 // Health Check route
-router.get('/health', getHealth);
+//router.get('/health', getHealth);
 
 // Task collection routes
 router.route('/tasks')
